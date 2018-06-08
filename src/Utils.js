@@ -12,8 +12,8 @@ const range = len => {
 
 const newPerson = () => {
   return {
-    firstName: 'anchal',
-    lastName: 'jain',
+    firstName: 'Jone',
+    lastName: 'Mathew',
   };
 };
 

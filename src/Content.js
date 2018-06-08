@@ -44,16 +44,15 @@ class Content extends Component {
 					data={data}
 					columns={columns}
 					className="-striped -highlight"
-					// getTdProps={(state, rowInfo, column, instance) => {
-					// 	return {
-					// 		onClick: (e, handleOriginal) => {
-					// 			console.log('It was in this row:', rowInfo);
-					// 			this.handleClick(rowInfo.index);
-					// 		},
-					// 	};
-					// }}
+					getTrProps={(state, rowInfo, column, instance) => {
+						return {
+							onClick: (e, handleOriginal) => {
+								this.handleClick(rowInfo.index);
+							},
+						};
+					}}
 					SubComponent={(row) =>
-						row0 ? (
+						row.index === 0 ? (
 							<div style={{ padding: '20px' }}>
 								 <Link to="/home1"> r1 subrow1</Link>
 								  <Link to="/home2"> r1 subrow2</Link>
