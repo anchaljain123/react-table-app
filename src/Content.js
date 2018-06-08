@@ -30,27 +30,16 @@ class Content extends Component {
 			data: makeData(),
 		};
 	}
-	handleClick = (key) => {
-		this.props.updateValue(`row${key}`);
-	};
-
 	render() {
 		const { data } = this.state;
-		console.log('this.props.rowReducer', this.props.rowReducer);
-		const { row0, row1 } = this.props.rowReducer;
 		return (
 			<div>
 				<ReactTable
 					data={data}
 					columns={columns}
 					className="-striped -highlight"
-					getTrProps={(state, rowInfo, column, instance) => {
-						return {
-							onClick: (e, handleOriginal) => {
-								this.handleClick(rowInfo.index);
-							},
-						};
-					}}
+					expanded={this.props.rowReducer}
+					onExpandedChange={expanded => this.props.updateValue(expanded)}
 					SubComponent={(row) =>
 						row.index === 0 ? (
 							<div style={{ padding: '20px' }}>
@@ -72,10 +61,10 @@ class Content extends Component {
 export default connect(
 	(state) => state,
 	(dispatch) => ({
-		updateValue: (key) =>
+		updateValue: (rows) =>
 			dispatch({
-				type: 'UPDATE_VALUES',
-				keyValue: key,
+				type: 'STORE_ROWS',
+				rows: rows
 			}),
 	})
 )(Content);
